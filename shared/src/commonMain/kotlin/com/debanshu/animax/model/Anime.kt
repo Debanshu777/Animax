@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AnimeList(
+data class Anime(
     @SerialName("aired")
     val aired: Aired = Aired(),
     @SerialName("airing")

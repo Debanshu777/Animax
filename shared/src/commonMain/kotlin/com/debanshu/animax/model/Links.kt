@@ -13,5 +13,5 @@ data class Links(
     @SerialName("next")
     val next: String = "", // http://api.jikan.moe/v4/top/anime?=2
     @SerialName("prev")
-    val prev: Any? = null // null
+    val prev: String? = null // null
 )
