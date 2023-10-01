@@ -53,7 +53,7 @@ fun GridViewAnime() {
     Scaffold(topBar = {
         TopAppBar {
             Row(modifier = Modifier.padding(10.dp)) {
-                Text(text = "Products")
+                Text(text = "Animax")
             }
         }
     }) { defaultPadding ->

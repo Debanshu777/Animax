@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SDWebImageCompat.h"
 #import "NSData+ImageContentType.h"
+#import "SDImageFrame.h"
 
 typedef NSString * SDImageCoderOption NS_STRING_ENUM;
 typedef NSDictionary<SDImageCoderOption, id> SDImageCoderOptions;
@@ -73,6 +74,19 @@ FOUNDATION_EXPORT SDImageCoderOption _Nonnull const SDImageCoderDecodeTypeIdenti
  @note works for `SDImageCoder`, `SDProgressiveImageCoder`, `SDAnimatedImageCoder`.
  */
 FOUNDATION_EXPORT SDImageCoderOption _Nonnull const SDImageCoderDecodeUseLazyDecoding;
+
+/**
+ A NSUInteger value to provide the limit bytes during decoding. This can help to avoid OOM on large frame count animated image or large pixel static image when you don't know how much RAM it occupied before decoding
+ The decoder will do these logic based on limit bytes:
+ 1. Get the total frame count (static image means 1)
+ 2. Calculate the `framePixelSize` width/height to `sqrt(limitBytes / frameCount / bytesPerPixel)`, keeping aspect ratio (at least 1x1)
+ 3. If the `framePixelSize < originalImagePixelSize`, then do thumbnail decoding (see `SDImageCoderDecodeThumbnailPixelSize`) use the `framePixelSize` and `preseveAspectRatio = YES`
+ 4. Else, use the full pixel decoding (small than limit bytes)
+ 5. Whatever result, this does not effect the animated/static behavior of image. So even if you set `limitBytes = 1 && frameCount = 100`, we will stll create animated image with each frame `1x1` pixel size.
+ @note You can use the logic from `+[SDImageCoder scaledSizeWithImageSize:limitBytes:bytesPerPixel:frameCount:]`
+ @note This option has higher priority than `.decodeThumbnailPixelSize`
+ */
+FOUNDATION_EXPORT SDImageCoderOption _Nonnull const SDImageCoderDecodeScaleDownLimitBytes;
 
 // These options are for image encoding
 /**
@@ -171,7 +185,8 @@ FOUNDATION_EXPORT SDImageCoderOption _Nonnull const SDImageCoderWebImageContext 
 
 /**
  Encode the image to image data.
- @note This protocol may supports encode animated image frames. You can use `+[SDImageCoderHelper framesFromAnimatedImage:]` to assemble an animated image with frames.
+ @note This protocol may supports encode animated image frames. You can use `+[SDImageCoderHelper framesFromAnimatedImage:]` to assemble an animated image with frames. But this consume time is not always reversible. In 5.15.0, we introduce `encodedDataWithFrames` API for better animated image encoding. Use that instead.
+ @note Which means, this just forward to `encodedDataWithFrames([SDImageFrame(image: image, duration: 0], image.sd_imageLoopCount))`
 
  @param image The image to be encoded
  @param format The image format to encode, you should note `SDImageFormatUndefined` format is also  possible
@@ -182,6 +197,21 @@ FOUNDATION_EXPORT SDImageCoderOption _Nonnull const SDImageCoderWebImageContext 
                                    format:(SDImageFormat)format
                                   options:(nullable SDImageCoderOptions *)options;
 
+#pragma mark - Animated Encoding
+@optional
+/**
+ Encode the animated image frames to image data.
+
+ @param frames The animated image frames to be encoded, should be at least 1 element, or it will fallback to static image encode.
+ @param loopCount The final animated image loop count. 0 means infinity loop. This config ignore each frame's `sd_imageLoopCount`
+ @param format The image format to encode, you should note `SDImageFormatUndefined` format is also  possible
+ @param options A dictionary containing any encoding options. Pass @{SDImageCoderEncodeCompressionQuality: @(1)} to specify compression quality.
+ @return The encoded image data
+ */
+- (nullable NSData *)encodedDataWithFrames:(nonnull NSArray<SDImageFrame *>*)frames
+                                 loopCount:(NSUInteger)loopCount
+                                    format:(SDImageFormat)format
+                                   options:(nullable SDImageCoderOptions *)options;
 @end
 
 #pragma mark - Progressive Coder
