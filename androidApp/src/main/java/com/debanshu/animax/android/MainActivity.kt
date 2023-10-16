@@ -21,8 +21,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.debanshu.animax.model.Anime
-import com.debanshu.animax.usecase.GetTopAnimeUseCase
+import com.debanshu.animax.data.model.Anime
+import com.debanshu.animax.data.usecase.GetTopAnimeUseCase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

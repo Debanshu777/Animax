@@ -1,4 +1,5 @@
 PODS:
+  - mokoMvvmFlowSwiftUI (0.16.1)
   - SDWebImage (5.18.2):
     - SDWebImage/Core (= 5.18.2)
   - SDWebImage/Core (5.18.2)
@@ -7,6 +8,7 @@ PODS:
   - shared (1.0)
 
 DEPENDENCIES:
+  - mokoMvvmFlowSwiftUI (from `https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.16.1/mokoMvvmFlowSwiftUI.podspec`)
   - SDWebImageSwiftUI
   - shared (from `../shared`)
 
@@ -16,14 +18,17 @@ SPEC REPOS:
     - SDWebImageSwiftUI
 
 EXTERNAL SOURCES:
+  mokoMvvmFlowSwiftUI:
+    :podspec: https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.16.1/mokoMvvmFlowSwiftUI.podspec
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
+  mokoMvvmFlowSwiftUI: e2ecbc38ea996fc376bf297041aeaad06ac44c89
   SDWebImage: c0de394d7cf7f9838aed1fd6bb6037654a4572e4
   SDWebImageSwiftUI: 17396b7889f9abc27231caaeb64c537564284aab
-  shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
+  shared: d22e29033a2b5a0efa52d701bcf02fc8d9e96808
 
-PODFILE CHECKSUM: c51c5a796cecb56b41b6a7c2856ddd3f7bb8a40b
+PODFILE CHECKSUM: 518784156e2fc95a245f52cfbab68ee8a26ef763
 
 COCOAPODS: 1.13.0
