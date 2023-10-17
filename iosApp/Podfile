@@ -3,5 +3,4 @@ target 'iosApp' do
   platform :ios, '14.1'
   pod 'shared', :path => '../shared'
   pod 'SDWebImageSwiftUI'
-  pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.16.1/mokoMvvmFlowSwiftUI.podspec'
 end

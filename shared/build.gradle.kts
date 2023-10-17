@@ -11,6 +11,13 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
+        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
+            export("dev.icerock.moko:mvvm-core:0.16.1")
+            export("dev.icerock.moko:mvvm-livedata:0.16.1")
+        }
+    }
+
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -18,9 +25,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "MultiPlatformLibrary"
-            export("dev.icerock.moko:mvvm-core:0.16.1")
-            export("dev.icerock.moko:mvvm-flow:0.16.1")
+            baseName = "shared"
         }
     }
     
@@ -34,9 +39,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("dev.icerock.moko:mvvm-core:0.16.1") // only ViewModel, EventsDispatcher, Dispatchers.UI
-                implementation("dev.icerock.moko:mvvm-flow:0.16.1") // api mvvm-core, CFlow for native and binding extensions
-                implementation("io.insert-koin:koin-core:3.5.0")
+                implementation("io.insert-koin:koin-core:3.2.0")
             }
         }
         val commonTest by getting {
@@ -47,11 +50,10 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-                implementation("io.insert-koin:koin-android:3.5.0")
-                implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+                implementation("io.insert-koin:koin-android:3.2.0")
+                implementation("io.insert-koin:koin-androidx-compose:3.2.0")
             }
         }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -87,4 +89,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+dependencies {
+    commonMainApi("dev.icerock.moko:mvvm-core:0.16.1")
+    commonMainApi("dev.icerock.moko:mvvm-compose:0.16.1")
+    commonMainApi("dev.icerock.moko:mvvm-livedata:0.16.1")
+    commonMainApi("dev.icerock.moko:mvvm-flow:0.16.1")
+    commonMainApi("dev.icerock.moko:mvvm-flow-compose:0.16.1")
 }
