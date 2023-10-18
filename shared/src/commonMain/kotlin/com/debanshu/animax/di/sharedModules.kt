@@ -14,6 +14,6 @@ private val utilityModule = module {
     factory { provideDispatcher() }
 }
 
-private val sharedModules = listOf(dataModule, utilityModule)
+private val sharedModules = listOf(dataModule, utilityModule, getViewModelByPlatform())
 
 fun getSharedModules() = sharedModules

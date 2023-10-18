@@ -1,7 +1,7 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
+struct GridViewAnime: View {
     @State private var topAnimeList:[Anime]=[]
     private let adaptaiveColumns = [
         GridItem(.adaptive(minimum: 170))
@@ -28,8 +28,8 @@ struct ContentView: View {
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct GridViewAnime_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+		GridViewAnime()
 	}
 }
