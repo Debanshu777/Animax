@@ -2,6 +2,7 @@ package com.debanshu.animax.data
 
 import com.debanshu.animax.data.model.Anime
 import com.debanshu.animax.data.usecase.GetTopAnimeUseCase
+import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 class AppViewModel(private val getTopAnimeUseCase: GetTopAnimeUseCase) : ViewModel() {
     private val animeMutable =
         MutableStateFlow<AnimeListState>(AnimeListState.Uninitialized)
-    val animeState = animeMutable.asStateFlow()
+    val animeState = animeMutable.asStateFlow().cStateFlow()
 
     init {
         loadMovies()

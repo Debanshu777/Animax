@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import shared
+import MultiPlatformLibrary
 import SDWebImageSwiftUI
 
 struct AnimeGridItem: View {

@@ -11,12 +11,12 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
-        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
-            export("dev.icerock.moko:mvvm-core:0.16.1")
-            export("dev.icerock.moko:mvvm-livedata:0.16.1")
-        }
-    }
+//    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
+//        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
+//            export("dev.icerock.moko:mvvm-core:0.16.1")
+//            export("dev.icerock.moko:mvvm-livedata:0.16.1")
+//        }
+//    }
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -25,7 +25,9 @@ kotlin {
         ios.deploymentTarget = "14.1"
         podfile = project.file("../iosApp/Podfile")
         framework {
-            baseName = "shared"
+            baseName = "MultiPlatformLibrary"
+            export("dev.icerock.moko:mvvm-core:0.16.1")
+            export("dev.icerock.moko:mvvm-flow:0.16.1")
         }
     }
     
@@ -39,6 +41,8 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                api("dev.icerock.moko:mvvm-core:0.16.1")
+                api("dev.icerock.moko:mvvm-flow:0.16.1")
                 implementation("io.insert-koin:koin-core:3.2.0")
             }
         }
@@ -89,12 +93,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-}
-
-dependencies {
-    commonMainApi("dev.icerock.moko:mvvm-core:0.16.1")
-    commonMainApi("dev.icerock.moko:mvvm-compose:0.16.1")
-    commonMainApi("dev.icerock.moko:mvvm-livedata:0.16.1")
-    commonMainApi("dev.icerock.moko:mvvm-flow:0.16.1")
-    commonMainApi("dev.icerock.moko:mvvm-flow-compose:0.16.1")
 }
