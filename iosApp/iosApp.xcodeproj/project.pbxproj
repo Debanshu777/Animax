@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		7555FF83242A565900829871 /* GridViewAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* GridViewAnime.swift */; };
 		A5801E0CCE07B4408CA00515 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C837237D66198A8DD98B3C /* Pods_iosApp.framework */; };
 		D41CDABD2989BAE5003DAA2E /* AnimeGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */; };
 /* End PBXBuildFile section */
@@ -23,7 +23,7 @@
 		43BA3D1DE1179CA5ADFAA7DA /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		66C837237D66198A8DD98B3C /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7555FF82242A565900829871 /* GridViewAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewAnime.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeGridItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,11 +87,11 @@
 			isa = PBXGroup;
 			children = (
 				D41CDABB2989BAC0003DAA2E /* Views */,
+				7555FF82242A565900829871 /* GridViewAnime.swift */,
+				058557D7273AAEEB004C7B11 /* Preview Content */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
-				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 			files = (
 				D41CDABD2989BAE5003DAA2E /* AnimeGridItem.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				7555FF83242A565900829871 /* GridViewAnime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

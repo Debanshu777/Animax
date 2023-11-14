@@ -17,7 +17,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packagingOptions {
         resources {
@@ -41,13 +41,18 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.5.2")
-    implementation("androidx.compose.ui:ui-tooling:1.5.2")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.2")
-    implementation("androidx.compose.foundation:foundation:1.5.2")
-    implementation("androidx.compose.material:material:1.5.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.compose.ui:ui:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+    implementation("androidx.compose.foundation:foundation:1.5.3")
+    implementation("androidx.compose.material:material:1.5.3")
+    implementation("androidx.activity:activity-compose:1.8.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+    val koin = "3.5.0"
+    implementation("io.insert-koin:koin-android:${koin}")
+    implementation("io.insert-koin:koin-androidx-compose:${koin}")
 }
