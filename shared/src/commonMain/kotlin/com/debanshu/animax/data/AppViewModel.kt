@@ -38,6 +38,6 @@ class AppViewModel(private val getTopAnimeUseCase: GetTopAnimeUseCase) : ViewMod
 sealed interface AnimeListState {
     data class Success(val data: List<Anime>) : AnimeListState
     data class Error(val exceptionMessage: String) : AnimeListState
-    object Loading : AnimeListState
-    object Uninitialized : AnimeListState
+    data object Loading : AnimeListState
+    data object Uninitialized : AnimeListState
 }

@@ -11,13 +11,6 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-//    targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java).all {
-//        binaries.withType(org.jetbrains.kotlin.gradle.plugin.mpp.Framework::class.java).all {
-//            export("dev.icerock.moko:mvvm-core:0.16.1")
-//            export("dev.icerock.moko:mvvm-livedata:0.16.1")
-//        }
-//    }
-
     cocoapods {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
@@ -55,7 +48,6 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.insert-koin:koin-android:3.2.0")
-                implementation("io.insert-koin:koin-androidx-compose:3.2.0")
             }
         }
         val iosX64Main by getting
