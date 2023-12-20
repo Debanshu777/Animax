@@ -11,7 +11,7 @@ import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI
 
 struct LocalGridView: View {
-    @ObservedObject var viewModel: AppViewModel = KoinHelper().getAppViewModel()
+    @EnvironmentObject var viewModel: AppViewModel
     @State var uiState: AnimeLocalState = AnimeLocalStateUninitialized()
     
     var animeData: [LocalAnimeEntity] = []
@@ -22,31 +22,35 @@ struct LocalGridView: View {
     
     var body: some View {
         let appUiState = viewModel.animeLocalState
-        VStack{
-            switch(uiState){
-            case is AnimeLocalStateLoading:
-                LoadingView()
-            case let successState as AnimeLocalStateSuccess:
-                ScrollView{
-                    LazyVGrid(columns: adaptaiveColumns, spacing: 20){
-                        ForEach(successState.data, id: \.id) { anime in
-                            AnimeGridLocalItem(
-                                onClick: {
-                                    viewModel.deleteAnimeById(id: anime.id as! Int64)
-                                }, anime:anime)
+        NavigationView{
+            VStack{
+                switch(uiState){
+                case is AnimeLocalStateLoading:
+                    LoadingView()
+                case let successState as AnimeLocalStateSuccess:
+                    ScrollView{
+                        LazyVGrid(columns: adaptaiveColumns, spacing: 20){
+                            ForEach(successState.data, id: \.id) { anime in
+                                AnimeGridLocalItem(
+                                    onClick: {
+                                        viewModel.deleteAnimeById(id: anime.id as! Int64)
+                                    }, anime:anime)
+                            }
                         }
                     }
+                case is AnimeLocalStateError:
+                    ErrorView()
+                default:
+                    ErrorView()
                 }
-            case is AnimeLocalStateError:
-                ErrorView()
-            default:
-                ErrorView()
-            }
-        }.onAppear {
-            appUiState.subscribe { state in
-                self.uiState = state!
-            }
-            viewModel.loadLocalAnime()
+            }.padding([.horizontal])
+                .navigationTitle("Favourite")
+                .task {
+                    appUiState.subscribe { state in
+                        self.uiState = state!
+                    }
+                    viewModel.loadLocalAnime()
+                }
         }
     }
 }

@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import MultiPlatformLibrary
 
 struct ContentView: View {
+    @ObservedObject var viewModel: AppViewModel = KoinHelper().getAppViewModel()
+    
     var body: some View {
         TabView {
             GridViewAnime().tabItem {
@@ -19,7 +22,7 @@ struct ContentView: View {
                 Image(systemName: "heart")
                 Text("Favourite")
             }
-        }
+        }.environmentObject(viewModel)
     }
 }
 
