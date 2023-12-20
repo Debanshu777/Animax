@@ -13,6 +13,8 @@
 		7555FF83242A565900829871 /* GridViewAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* GridViewAnime.swift */; };
 		A5801E0CCE07B4408CA00515 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C837237D66198A8DD98B3C /* Pods_iosApp.framework */; };
 		D41CDABD2989BAE5003DAA2E /* AnimeGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */; };
+		D4B88E0A2B30445900D3E428 /* LocalGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B88E092B30445900D3E428 /* LocalGridView.swift */; };
+		D4B88E0C2B30458D00D3E428 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B88E0B2B30458D00D3E428 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		7555FF82242A565900829871 /* GridViewAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewAnime.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeGridItem.swift; sourceTree = "<group>"; };
+		D4B88E092B30445900D3E428 /* LocalGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGridView.swift; sourceTree = "<group>"; };
+		D4B88E0B2B30458D00D3E428 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +90,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				D4B88E082B3043CA00D3E428 /* Components */,
 				D41CDABB2989BAC0003DAA2E /* Views */,
-				7555FF82242A565900829871 /* GridViewAnime.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -99,9 +103,19 @@
 		D41CDABB2989BAC0003DAA2E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */,
+				7555FF82242A565900829871 /* GridViewAnime.swift */,
+				D4B88E092B30445900D3E428 /* LocalGridView.swift */,
+				D4B88E0B2B30458D00D3E428 /* ContentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D4B88E082B3043CA00D3E428 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D41CDABC2989BAE5003DAA2E /* AnimeGridItem.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +233,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41CDABD2989BAE5003DAA2E /* AnimeGridItem.swift in Sources */,
+				D4B88E0C2B30458D00D3E428 /* ContentView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				D4B88E0A2B30445900D3E428 /* LocalGridView.swift in Sources */,
 				7555FF83242A565900829871 /* GridViewAnime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

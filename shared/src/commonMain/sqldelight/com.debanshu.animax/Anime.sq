@@ -1,0 +1,27 @@
+CREATE TABLE animeEntity (
+ id INTEGER NOT NULL PRIMARY KEY,
+ name TEXT NOT NULL,
+ imageUrl TEXT NOT NULL,
+ created Integer NOT NULL
+);
+
+getAllAnime:
+SELECT * FROM animeEntity;
+
+getAnimeById:
+SELECT * FROM animeEntity WHERE id = ?;
+
+insertAnime:
+INSERT OR REPLACE
+INTO animeEntity(
+    id,
+    name,
+    imageUrl,
+    created
+) VALUES (?,?,?,?);
+
+deleteAnimeById:
+DELETE FROM animeEntity WHERE  id = ?;
+
+removeAllAnime:
+DELETE FROM animeEntity;

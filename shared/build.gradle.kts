@@ -3,6 +3,8 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlinx-serialization")
+    id("app.cash.sqldelight") version "2.0.1"
+    id("co.touchlab.skie") version "0.6.0"
 }
 
 kotlin {
@@ -29,6 +31,18 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
+                dependencies {
+                    /* other implementations */
+                    implementation("co.touchlab:stately-common:2.0.0-rc3")
+                    implementation("co.touchlab:stately-collections:2.0.0-rc3")
+                    implementation("co.touchlab:stately-concurrency:2.0.0-rc3")
+                    implementation("co.touchlab:stately-isolate:2.0.0-rc3")
+                }
+
+                configurations.all {
+                    exclude(group = "co.touchlab", module = "stately-strict-jvm")
+                }
+
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
@@ -37,6 +51,8 @@ kotlin {
                 api("dev.icerock.moko:mvvm-core:0.16.1")
                 api("dev.icerock.moko:mvvm-flow:0.16.1")
                 implementation("io.insert-koin:koin-core:3.2.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+                implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
             }
         }
         val commonTest by getting {
@@ -48,6 +64,7 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("io.insert-koin:koin-android:3.2.0")
+                implementation("app.cash.sqldelight:android-driver:2.0.1")
             }
         }
         val iosX64Main by getting
@@ -60,16 +77,8 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation("app.cash.sqldelight:native-driver:2.0.1")
             }
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }
@@ -79,10 +88,17 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.debanshu.animax")
+        }
     }
 }

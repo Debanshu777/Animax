@@ -22,7 +22,9 @@ struct GridViewAnime: View {
                     ScrollView{
                         LazyVGrid(columns: adaptaiveColumns, spacing: 20){
                             ForEach(successState.data,id: \.self){ anime in
-                                AnimeGridItem(anime:anime)
+                                AnimeGridItem(onClick: {
+                                    viewModel.createDummyData(id: anime.malId as! Int64,title:anime.titleEnglish! ,imageUrl:anime.images.jpg.imageUrl)
+                                }, anime:anime)
                             }
                         }
                     }
