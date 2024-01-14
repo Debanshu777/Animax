@@ -12,7 +12,7 @@ import org.koin.core.component.inject
 class GetLocalAnimeUseCase : KoinComponent {
     private val localDataRepository: LocalDataRepository by inject()
     private val dispatcher: Dispatcher by inject()
-    suspend fun execute(): Flow<LocalAnimeEntity> =
+    suspend fun execute(): Flow<List<LocalAnimeEntity>> =
         withContext(dispatcher.io) {
             localDataRepository.getAllAnime()
         }

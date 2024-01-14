@@ -6,14 +6,12 @@ import com.debanshu.animax.data.usecase.AddLocalAnimeUseCase
 import com.debanshu.animax.data.usecase.DeleteLocalAnimeByIdUseCase
 import com.debanshu.animax.data.usecase.GetLocalAnimeUseCase
 import com.debanshu.animax.data.usecase.GetTopAnimeUseCase
-import dev.icerock.moko.mvvm.flow.cFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 class AppViewModel(
@@ -32,10 +30,10 @@ class AppViewModel(
 
     init {
         loadRemoteAnime()
-        //loadLocalAnime()
+        loadLocalAnime()
     }
 
-    fun createDummyData(id:Long,title:String,imageUrl:String){
+    fun createDummyData(id: Long, title:String, imageUrl:String){
         viewModelScope.launch {
             addLocalAnimeUseCase.execute(id,title,imageUrl)
         }
@@ -62,11 +60,7 @@ class AppViewModel(
         animeLocalMutable.value = AnimeLocalState.Loading
         viewModelScope.launch {
             try {
-                val list = mutableListOf<LocalAnimeEntity>()
-                getLocalAnimeUseCase.execute().collect{
-                    list.add(it)
-                }
-                animeLocalMutable.value = AnimeLocalState.Success(list)
+                animeLocalMutable.value = AnimeLocalState.Success(getLocalAnimeUseCase.execute())
             } catch (e: Exception) {
                 e.printStackTrace()
                 animeLocalMutable.value = AnimeLocalState.Error(e.message.orEmpty())
@@ -88,7 +82,7 @@ sealed interface AnimeListState {
 }
 
 sealed interface AnimeLocalState {
-    data class Success(val data: List<LocalAnimeEntity>) : AnimeLocalState
+    data class Success(val data: Flow<List<LocalAnimeEntity>>) : AnimeLocalState
     data class Error(val exceptionMessage: String) : AnimeLocalState
     data object Loading : AnimeLocalState
     data object Uninitialized : AnimeLocalState

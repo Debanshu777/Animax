@@ -1,5 +1,7 @@
 package com.debanshu.animax.data.repository
 
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import com.debanshu.animax.AppDatabase
 import com.debanshu.animax.data.DatabaseDriverFactory
 import com.debanshu.animax.data.domain.DateTimeUtil
@@ -31,10 +33,13 @@ class LocalDataRepository(database: AppDatabase) {
         return queries.getAnimeById(id).executeAsOneOrNull()?.toLocalAnimeEntity()
     }
 
-    fun getAllAnime(): Flow<LocalAnimeEntity> {
-        return queries.getAllAnime().executeAsList().asFlow().map {
-            it.toLocalAnimeEntity()
+    fun getAllAnime(): Flow<List<LocalAnimeEntity>> {
+        return queries.getAllAnime()
+            .asFlow()
+            .mapToList(Dispatchers.IO).map { list ->
+            list.map { it.toLocalAnimeEntity() }
         }
+
     }
 
     fun deleteAnimeById(id: Long) {

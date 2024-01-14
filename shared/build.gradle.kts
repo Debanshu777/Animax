@@ -33,9 +33,9 @@ kotlin {
             dependencies {
                 dependencies {
                     /* other implementations */
-                    implementation("co.touchlab:stately-common:2.0.0-rc3")
-                    implementation("co.touchlab:stately-collections:2.0.0-rc3")
-                    implementation("co.touchlab:stately-concurrency:2.0.0-rc3")
+                    implementation("co.touchlab:stately-common:2.0.5")
+                    implementation("co.touchlab:stately-collections:2.0.5")
+                    implementation("co.touchlab:stately-concurrency:2.0.5")
                     implementation("co.touchlab:stately-isolate:2.0.0-rc3")
                 }
 
@@ -50,7 +50,7 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 api("dev.icerock.moko:mvvm-core:0.16.1")
                 api("dev.icerock.moko:mvvm-flow:0.16.1")
-                implementation("io.insert-koin:koin-core:3.2.0")
+                implementation("io.insert-koin:koin-core:3.5.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
                 implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
             }
@@ -63,7 +63,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
-                implementation("io.insert-koin:koin-android:3.2.0")
+                implementation("io.insert-koin:koin-android:3.5.3")
                 implementation("app.cash.sqldelight:android-driver:2.0.1")
             }
         }
