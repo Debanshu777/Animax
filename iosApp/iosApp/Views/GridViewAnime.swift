@@ -3,7 +3,7 @@ import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI
 
 struct GridViewAnime: View {
-    @ObservedObject var viewModel: AppViewModel = KoinHelper().getAppViewModel()
+    @EnvironmentObject var viewModel: AppViewModel
     @State var uiState: AnimeListState = AnimeListStateUninitialized()
     
     private let adaptaiveColumns = [
@@ -22,7 +22,9 @@ struct GridViewAnime: View {
                     ScrollView{
                         LazyVGrid(columns: adaptaiveColumns, spacing: 20){
                             ForEach(successState.data,id: \.self){ anime in
-                                AnimeGridItem(anime:anime)
+                                AnimeGridItem(onClick: {
+                                    viewModel.createDummyData(id: anime.malId as! Int64,title:anime.titleEnglish! ,imageUrl:anime.images.jpg.imageUrl)
+                                }, anime:anime)
                             }
                         }
                     }
@@ -34,7 +36,7 @@ struct GridViewAnime: View {
             }
             .padding([.horizontal])
             .navigationTitle("Animax")
-        }.onAppear {
+        }.task {
             appUiState.subscribe { state in
                 self.uiState = state!
             }

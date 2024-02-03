@@ -1,11 +1,16 @@
 package com.debanshu.animax.di
 
 import com.debanshu.animax.data.AppViewModel
+import com.debanshu.animax.data.DatabaseDriverFactory
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 actual fun getViewModelByPlatform() = module {
     viewModel {
-        AppViewModel(get())
+        AppViewModel(get(),get(),get(),get())
     }
+}
+
+actual fun getDataDriverFactory() = module {
+    single { DatabaseDriverFactory(get()) }
 }
